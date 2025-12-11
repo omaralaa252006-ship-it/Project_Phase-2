@@ -54,7 +54,7 @@ string Input::GetSrting(Output* pOut)
 	}
 }
 
-	///TODO: Implement this Function
+	///TODO:
 	//Read a complete string from the user until the user presses "ENTER".
 	//If the user presses "ESCAPE". This function should return an empty string.
 	//"BACKSPACE" should be also supported
