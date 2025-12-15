@@ -145,7 +145,12 @@ ActionType Input::GetUserAction() const
 			case ITM_SIM: return Simulation;
 			case ITM_TRUTH: return Create_TruthTable;
 			case ITM_DSN_MODE: return DSN_MODE;
+
 			}
+		}
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return SELECT;	//user want to select/unselect a component
 		}
 	}
 
