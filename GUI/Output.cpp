@@ -114,7 +114,7 @@ void Output::CreateDesignToolBar() const
 	MenuItemImages[ITM_INV] = "images\\Menu\\Menu_INV.jpg";
 
 	// --- Components ---
-	//MenuItemImages[ITM_Switch] = "images\\Menu\\Menu_Switch.jpg";
+	MenuItemImages[ITM_Switch] = "images\\Menu\\Menu_Switch.jpg";
 	MenuItemImages[ITM_LED] = "images\\Menu\\Menu_LED.jpg";
 
 	// --- Connection ---
@@ -134,7 +134,7 @@ void Output::CreateDesignToolBar() const
 
 	// --- File Operations ---
 	MenuItemImages[ITM_SAVE] = "images\\Menu\\Menu_SAVE.jpg";
-	//MenuItemImages[ITM_LOAD] = "images\\Menu\\Menu_LOAD.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\Menu\\Menu_LOAD.jpg";
 
 	// --- Modes & Exit ---
 	MenuItemImages[ITM_SIM_MODE] = "images\\Menu\\Menu_SimMode.jpeg"; 

@@ -87,7 +87,7 @@ enum DsgnMenuItem //The items of the design menu (you should add more items)
 	ITM_INV,		// Inverter
 	ITM_SIM_MODE,	// Switch to Simulation Mode
 	// --- Input/Output Components ---
-	//ITM_Switch,		// Switch
+	ITM_Switch,		// Switch
 	ITM_LED,		// LED
 
 	// --- Connection ---
@@ -107,7 +107,7 @@ enum DsgnMenuItem //The items of the design menu (you should add more items)
 
 	// --- File Operations ---
 	ITM_SAVE,		// Save Circuit
-	//ITM_LOAD,		// Load Circuit
+	ITM_LOAD,		// Load Circuit
 
 
 	
