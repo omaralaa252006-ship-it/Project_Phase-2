@@ -238,9 +238,23 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_CONNECTION:
 			//TODO: Create AddConection Action here
 			break;
-	
 
-	
+			// Handle switching between modes
+		case SIM_MODE:
+			// Switch to simulation mode and update toolbar
+			UI.AppMode = SIMULATION;
+			// Clear existing toolbar before drawing the simulation toolbar to avoid overlap
+			OutputInterface->ClearToolBar();
+			OutputInterface->CreateSimulationToolBar();
+			break;
+
+		case DSN_MODE:
+			// Switch back to design mode and update toolbar
+			UI.AppMode = DESIGN;
+			// Clear existing toolbar before drawing the design toolbar to avoid overlap
+			OutputInterface->ClearToolBar();
+			OutputInterface->CreateDesignToolBar();
+			break;
 
 		case EXIT:
 			///TODO: create ExitAction here
