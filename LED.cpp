@@ -19,7 +19,19 @@ void LED::Operate()
 
 void LED::Draw(Output* pOut)
 {
-	pOut->DrawLED(m_GfxInfo, IsSelected());
+	//Call output class and pass gate drawing info to it.
+	pOut->DrawLED(m_GfxInfo, IsSelected()); {
+
+
+		if (!m_Label.empty())
+		{
+			int labelX = m_GfxInfo.x1 + UI.AND2_Width / 2 - (m_Label.length() * 4);
+			int labelY = m_GfxInfo.y1 - 15;
+
+			pOut->DrawString(labelX, labelY, m_Label);
+		}
+
+	};
 }
 
 int LED::GetOutPinStatus()

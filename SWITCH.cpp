@@ -34,7 +34,18 @@ Component* SWITCH::clone() {
 void SWITCH::Draw(Output* pOut)
 {
 	//Call output class and pass gate drawing info to it.
-	pOut->DrawSwitch(m_GfxInfo);
+	pOut->DrawSwitch(m_GfxInfo, IsSelected()); {
+
+
+		if (!m_Label.empty())
+		{
+			int labelX = m_GfxInfo.x1 + UI.AND2_Width / 2 - (m_Label.length() * 4);
+			int labelY = m_GfxInfo.y1 - 15;
+
+			pOut->DrawString(labelX, labelY, m_Label);
+		}
+
+	};
 }
 
 //returns status of outputpin
