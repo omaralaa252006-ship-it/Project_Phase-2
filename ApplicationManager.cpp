@@ -54,6 +54,27 @@ Component* ApplicationManager::GetComponentAt(int x, int y) {
 	return nullptr;
 }
 
+void ApplicationManager::DeleteComponent(Component* pComp)
+{
+
+	if (!pComp)
+		return;
+	RemoveFromSelection(pComp);
+
+	for (int i = 0;i < CompCount;i++) {
+		if (CompList[i] == pComp) {
+
+			for (int j = i;j < CompCount - 1;j++)
+				CompList[j] = CompList[j + 1];
+
+			CompList[CompCount - 1] = nullptr;
+			CompCount--;
+			delete pComp;
+			return;
+		}
+	}
+}
+
 void ApplicationManager::AddToSelection(Component* pComp) {
 	if (!pComp) { return; }
 
