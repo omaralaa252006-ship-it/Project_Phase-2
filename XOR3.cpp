@@ -22,7 +22,16 @@ void XOR3::Operate()
 void XOR3::Draw(Output* pOut)
 {
 	//Call output class and pass gate drawing info to it.
-	pOut->DrawXOR3(m_GfxInfo);
+	pOut->DrawXOR3(m_GfxInfo, IsSelected()); {
+
+		if (!m_Label.empty())
+		{
+			int labelX = m_GfxInfo.x1 + UI.AND2_Width / 2 - (m_Label.length() * 4);
+			int labelY = m_GfxInfo.y1 - 15;
+
+			pOut->DrawString(labelX, labelY, m_Label);
+		}
+	}
 }
 
 //returns status of outputpin
@@ -42,4 +51,8 @@ int XOR3::GetInputPinStatus(int n)
 void XOR3::setInputPinStatus(int n, STATUS s)
 {
 	m_InputPins[n - 1].setStatus(s);
+}
+
+Component* XOR3::clone() {
+	return new XOR3(*this);
 }

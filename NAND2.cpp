@@ -22,7 +22,18 @@ void NAND2::Operate()
 void NAND2::Draw(Output* pOut)
 {
 	//Call output class and pass gate drawing info to it.
-	pOut->DrawNAND2(m_GfxInfo);
+	pOut->DrawNAND2(m_GfxInfo, IsSelected()); {
+
+
+		if (!m_Label.empty())
+		{
+			int labelX = m_GfxInfo.x1 + UI.AND2_Width / 2 - (m_Label.length() * 4);
+			int labelY = m_GfxInfo.y1 - 15;
+
+			pOut->DrawString(labelX, labelY, m_Label);
+		}
+
+	}
 }
 
 //returns status of outputpin
@@ -42,4 +53,8 @@ int NAND2::GetInputPinStatus(int n)
 void NAND2::setInputPinStatus(int n, STATUS s)
 {
 	m_InputPins[n - 1].setStatus(s);
+}
+
+Component* NAND2::clone() {
+	return new NAND2(*this);
 }

@@ -22,7 +22,17 @@ void NOR3::Operate()
 void NOR3::Draw(Output* pOut)
 {
 	//Call output class and pass gate drawing info to it.
-	pOut->DrawNOR3(m_GfxInfo);
+	pOut->DrawNOR3(m_GfxInfo, IsSelected()); {
+
+		
+		if (!m_Label.empty())
+		{
+			int labelX = m_GfxInfo.x1 + UI.AND2_Width / 2 - (m_Label.length() * 4);
+			int labelY = m_GfxInfo.y1 - 15;
+
+			pOut->DrawString(labelX, labelY, m_Label);
+		}
+	}
 }
 
 //returns status of outputpin
@@ -42,4 +52,8 @@ int NOR3::GetInputPinStatus(int n)
 void NOR3::setInputPinStatus(int n, STATUS s)
 {
 	m_InputPins[n - 1].setStatus(s);
+}
+
+Component* NOR3::clone() {
+	return new NOR3(*this);
 }

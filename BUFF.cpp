@@ -22,7 +22,17 @@ void BUFF::Operate()
 void BUFF::Draw(Output* pOut)
 {
 	//Call output class and pass gate drawing info to it.
-	pOut->DrawBuff(m_GfxInfo);
+	pOut->DrawBuff(m_GfxInfo, IsSelected()); {
+
+		if (!m_Label.empty())
+		{
+			int labelX = m_GfxInfo.x1 + UI.AND2_Width / 2 - (m_Label.length() * 4);
+			int labelY = m_GfxInfo.y1 - 15;
+
+			pOut->DrawString(labelX, labelY, m_Label);
+		}
+
+	}
 }
 
 //returns status of outputpin
@@ -42,4 +52,8 @@ int BUFF::GetInputPinStatus(int n)
 void BUFF::setInputPinStatus(int n, STATUS s)
 {
 	m_InputPins[n - 1].setStatus(s);
+}
+
+Component* BUFF::clone() {
+	return new BUFF(*this);
 }

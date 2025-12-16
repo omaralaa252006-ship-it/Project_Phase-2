@@ -10,15 +10,27 @@
 #include "AddXORgate3.h"
 #include "AddBUFFgate.h"
 #include "AddINVgate.h"
+#include "DeleteAction.h"
+#include "Select.h"
+#include "Label.h"
+#include "Edit.h"
+#include "Copy.h"
+#include "Cut.h"
+#include "Paste.h"
 
 
 ApplicationManager::ApplicationManager()
 {
 	CompCount = 0;
+	SelectedCount = 0;
+	ClipboardComp = nullptr;
+	IsCut = false;
 
-	for(int i=0; i<MaxCompCount; i++)
+	for (int i = 0; i < MaxCompCount; i++)
+	{
 		CompList[i] = NULL;
-
+		SelectedComps[i] = NULL;
+	}
 	//Creates the Input / Output Objects & Initialize the GUI
 	OutputInterface = new Output();
 	InputInterface = OutputInterface->CreateInput();
@@ -26,9 +38,118 @@ ApplicationManager::ApplicationManager()
 ////////////////////////////////////////////////////////////////////
 void ApplicationManager::AddComponent(Component* pComp)
 {
+	if (CompCount >= MaxCompCount) return;
 	CompList[CompCount++] = pComp;		
 }
 ////////////////////////////////////////////////////////////////////
+void ApplicationManager::DeleteComponent(Component* pComp)
+{
+	
+	if (!pComp)
+		return;
+	RemoveFromSelection(pComp);
+
+	for (int i = 0;i < CompCount;i++) {
+		if (CompList[i] == pComp) {
+
+			for (int j = i;j < CompCount - 1;j++)
+				CompList[j] = CompList[j + 1];
+
+			CompList[CompCount-1] = nullptr;
+			CompCount--;
+			delete pComp;
+			return;
+		}
+	}
+}
+////////////////////////////////////////////////////////////////////
+
+Component* ApplicationManager::GetComponentAt(int x, int y) {
+	for (int i = CompCount - 1;i >= 0;i--) {
+		GraphicsInfo* pGfx = CompList[i]->GetGraphicsInfo();
+	 
+		if (x >= pGfx->x1 && x <= pGfx->x2 && y >= pGfx->y1 && y <= pGfx->y2)
+			return CompList[i];
+	
+	}
+	return nullptr;
+}
+
+void ApplicationManager::AddToSelection(Component* pComp) {
+	if (!pComp) { return; }
+
+	for (int i = 0;i < SelectedCount;i++)
+		if (SelectedComps[i] == pComp) return;
+
+	SelectedComps[SelectedCount++] = pComp;
+	pComp->SetSelected(true);
+}
+
+void ApplicationManager::RemoveFromSelection(Component* pComp) {
+	for (int i = 0;i < SelectedCount;i++) {
+		if (SelectedComps[i] == pComp) {
+			pComp->SetSelected(false);
+			for (int j = i;j < SelectedCount-1;j++)
+				SelectedComps[j] = SelectedComps[j + 1];
+			SelectedComps[SelectedCount - 1] = nullptr;
+			SelectedCount--;
+			return;
+		
+		}
+	}
+}
+
+void ApplicationManager::ClearSelection()
+{
+	for (int i = 0; i < SelectedCount; i++)
+		if (SelectedComps[i]) SelectedComps[i]->SetSelected(false);
+
+	SelectedCount = 0;
+}
+
+
+int ApplicationManager::GetSelectedCount()const{
+	return SelectedCount;
+}
+
+Component* ApplicationManager::GetSelectedCountAt(int index)const {
+	if (index < 0 || index >= SelectedCount) return nullptr;
+	return SelectedComps[index];
+}
+
+void ApplicationManager::SetClipboard(Component* pComp, bool cut) {
+	ClipboardComp = pComp;
+	IsCut = cut;
+}
+
+Component* ApplicationManager::GetClipboard() {
+	return ClipboardComp;
+}
+
+bool ApplicationManager::GetIsCut()const {
+	return IsCut;
+}
+
+
+//////////////////////////////////////////////////////////////////
+void ApplicationManager::SelectComponentsInRect(int x1, int y1, int x2, int y2)
+{
+	ClearSelection(); // Clear previous selection
+
+	for (int i = 0; i < CompCount; i++)
+	{
+		Component* comp = CompList[i];
+		GraphicsInfo* gfx = comp->GetGraphicsInfo();
+
+		// Select if the component overlaps the rectangle
+		if (!(gfx->x2 < x1 || gfx->x1 > x2 || gfx->y2 < y1 || gfx->y1 > y2))
+		{
+			AddToSelection(comp);
+		}
+	}
+}
+////////////////////////////////////////////////////////////////////////
+
 
 ActionType ApplicationManager::GetUserAction()
 {
@@ -86,9 +207,39 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new AddINVgate(this);
 			break;
 
+		case DEL:
+			pAct = new DeleteAction(this);
+			break;
+
+		case SELECT:
+			pAct = new Select(this);
+			break;
+
+		case EDIT_Label:
+			pAct = new Edit(this);
+			break;
+
+		case ADD_Label:
+			pAct = new Label(this);
+			break;
+			
+		case COPY:
+			pAct = new Copy(this);
+			break;
+
+		case CUT:
+			pAct = new Cut(this);
+			break;
+
+		case PASTE:
+			pAct = new Paste(this);
+			break;
+
 		case ADD_CONNECTION:
 			//TODO: Create AddConection Action here
 			break;
+
+
 	
 
 		case EXIT:
@@ -106,6 +257,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 void ApplicationManager::UpdateInterface()
 {
+	OutputInterface->ClearDrawingArea();
 		for(int i=0; i<CompCount; i++)
 			CompList[i]->Draw(OutputInterface);
 
@@ -133,3 +285,4 @@ ApplicationManager::~ApplicationManager()
 	delete InputInterface;
 	
 }
+

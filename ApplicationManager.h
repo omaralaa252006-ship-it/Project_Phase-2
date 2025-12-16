@@ -20,30 +20,54 @@ private:
 	Output* OutputInterface; //pointer to the Output Clase Interface
 	Input* InputInterface; //pointer to the Input Clase Interface
 
+	Component* ClipboardComp;
+	bool IsCut;
 
-public:
-
+	//For multi-select
+	Component* SelectedComps[MaxCompCount];
+	int SelectedCount;
 
 public:	
 	ApplicationManager(); //constructor
+	//destructor
+	~ApplicationManager();
 
 	//Reads the required action from the user and returns the corresponding action type
 	ActionType GetUserAction();
 	
 	//Creates an action and executes it
 	void ExecuteAction(ActionType);
-	
-	void UpdateInterface();	//Redraws all the drawing window
 
+	//Adds a new component to the list of components
+	void AddComponent(Component* pComp);
+	
+	//Multi-selection
+	void ClearSelection();
+	void AddToSelection(Component* pComp);
+	void RemoveFromSelection(Component* pComp);
+	int GetSelectedCount()const;
+	Component* GetSelectedCountAt(int index)const;
+
+
+	// managing component
+	void DeleteComponent(Component* pComp);
+	Component* GetComponentAt(int x, int y);
+	
+
+	void SetClipboard(Component* pComp, bool cut = false);
+	Component* GetClipboard();
+	bool GetIsCut()const;
+
+
+	void SelectComponentsInRect(int x1, int y1, int x2, int y2);
+
+
+	void UpdateInterface();	//Redraws all the drawing window
 	//Gets a pointer to Input / Output Object
 	Output* GetOutput();
 	Input* GetInput();
 
-	//Adds a new component to the list of components
-	void AddComponent(Component* pComp);
-
-	//destructor
-	~ApplicationManager();
+	
 };
 
 #endif

@@ -13,7 +13,7 @@ void Input::GetPointClicked(int &x, int &y)
 }
 
 
-string Input::GetSrting(Output* pOut)
+string Input::GetString(Output* pOut)
 {
 	string userInput = "";
 	char key;
@@ -53,6 +53,7 @@ string Input::GetSrting(Output* pOut)
 		}
 	}
 }
+
 
 	///TODO: Implement this Function
 	//Read a complete string from the user until the user presses "ENTER".
