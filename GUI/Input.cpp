@@ -92,7 +92,7 @@ ActionType Input::GetUserAction() const
 			case ITM_Buff: return ADD_Buff;
 			case ITM_INV: return ADD_INV;
 
-			//case ITM_Switch: return ADD_Switch;
+			case ITM_Switch: return ADD_Switch;
 			case ITM_LED: return ADD_LED;
 			case ITM_CONNECTION: return ADD_CONNECTION;
 

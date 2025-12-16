@@ -10,6 +10,7 @@
 #include "AddXORgate3.h"
 #include "AddBUFFgate.h"
 #include "AddINVgate.h"
+#include "AddSwitch.h"
 #include "DeleteAction.h"
 #include "Select.h"
 #include "Label.h"
@@ -17,6 +18,7 @@
 #include "Copy.h"
 #include "Cut.h"
 #include "Paste.h"
+#include "AddLED.h"
 
 
 ApplicationManager::ApplicationManager()
@@ -206,6 +208,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_INV:
 			pAct = new AddINVgate(this);
 			break;
+
+		case ADD_Switch:
+			pAct = new AddSwitch(this);
+			break;
+
+		case ADD_LED:
+			pAct = new AddLED(this); //TODO: Create AddLED Action here
 
 		case DEL:
 			pAct = new DeleteAction(this);

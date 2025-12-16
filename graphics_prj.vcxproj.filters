@@ -221,6 +221,18 @@
     <ClCompile Include="Label.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="SWITCH.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AddSwitch.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="LED.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AddLED.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defs.H" />
@@ -402,6 +414,18 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Edit.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="SWITCH.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AddSwitch.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="LED.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AddLED.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>
