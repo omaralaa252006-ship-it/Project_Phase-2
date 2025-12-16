@@ -21,6 +21,7 @@
 #include "AddLED.h"
 
 
+
 ApplicationManager::ApplicationManager()
 {
 	CompCount = 0;
@@ -214,7 +215,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 
 		case ADD_LED:
-			pAct = new AddLED(this); //TODO: Create AddLED Action here
+			pAct = new AddLED(this);
+			break;//TODO: Create AddLED Action here
 
 		case DEL:
 			pAct = new DeleteAction(this);
@@ -308,4 +310,12 @@ ApplicationManager::~ApplicationManager()
 	delete InputInterface;
 	
 }
+int ApplicationManager::GetCompCount() const {
+	return CompCount;
+}
 
+Component* ApplicationManager::GetComponent(int index) const {
+	if (index >= 0 && index < CompCount)
+		return CompList[index];
+	return nullptr;
+}

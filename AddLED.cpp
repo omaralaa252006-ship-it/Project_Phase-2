@@ -13,39 +13,27 @@ AddLED::~AddLED(void)
 
 void AddLED::ReadActionParameters()
 {
-	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-	//Print Action Message
-	pOut->PrintMsg("LED: Click to add the LED");
+	pOut->PrintMsg("LED: Click to add");
 
-	//Wait for User Input
 	pIn->GetPointClicked(Cx, Cy);
-
-	//Clear Status Bar
 	pOut->ClearStatusBar();
-
 }
-
 
 void AddLED::Execute()
 {
-	//Get Center point of the Gate
 	ReadActionParameters();
 
-	//Calculate the rectangle Corners
-	int Len = UI.LED_Width;
-	int Wdth = UI.LED_Height;
+	GraphicsInfo GInfo;
+	GInfo.x1 = Cx - UI.LED_Width / 2;
+	GInfo.x2 = Cx + UI.LED_Width / 2;
+	GInfo.y1 = Cy - UI.LED_Height / 2;
+	GInfo.y2 = Cy + UI.LED_Height / 2;
 
-	GraphicsInfo GInfo; //Gfx info to be used to construct the OR2 gate
-
-	GInfo.x1 = Cx - Len / 2;
-	GInfo.x2 = Cx + Len / 2;
-	GInfo.y1 = Cy - Wdth / 2;
-	GInfo.y2 = Cy + Wdth / 2;
-	LED* pA = new LED(GInfo, 0);
-	pManager->AddComponent(pA);
+	LED* pL = new LED(GInfo);
+	pManager->AddComponent(pL);
 }
 
 void AddLED::Undo()

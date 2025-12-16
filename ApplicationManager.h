@@ -67,7 +67,9 @@ public:
 	Output* GetOutput();
 	Input* GetInput();
 
-	
+	int GetCompCount() const;
+	Component* GetComponent(int index) const;
+
 };
 
 #endif
