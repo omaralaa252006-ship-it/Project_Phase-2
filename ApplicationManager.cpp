@@ -35,32 +35,11 @@ ApplicationManager::ApplicationManager()
 	OutputInterface = new Output();
 	InputInterface = OutputInterface->CreateInput();
 }
-////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 void ApplicationManager::AddComponent(Component* pComp)
 {
 	if (CompCount >= MaxCompCount) return;
 	CompList[CompCount++] = pComp;		
-}
-////////////////////////////////////////////////////////////////////
-void ApplicationManager::DeleteComponent(Component* pComp)
-{
-	
-	if (!pComp)
-		return;
-	RemoveFromSelection(pComp);
-
-	for (int i = 0;i < CompCount;i++) {
-		if (CompList[i] == pComp) {
-
-			for (int j = i;j < CompCount - 1;j++)
-				CompList[j] = CompList[j + 1];
-
-			CompList[CompCount-1] = nullptr;
-			CompCount--;
-			delete pComp;
-			return;
-		}
-	}
 }
 ////////////////////////////////////////////////////////////////////
 
@@ -156,7 +135,7 @@ ActionType ApplicationManager::GetUserAction()
 	//Call input to get what action is reuired from the user
 	return InputInterface->GetUserAction(); 	
 }
-////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 
 void ApplicationManager::ExecuteAction(ActionType ActType)
 {
@@ -238,7 +217,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case ADD_CONNECTION:
 			//TODO: Create AddConection Action here
 			break;
-
+	
 
 	
 
@@ -253,7 +232,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = NULL;
 	}
 }
-////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 
 void ApplicationManager::UpdateInterface()
 {
@@ -263,19 +242,19 @@ void ApplicationManager::UpdateInterface()
 
 }
 
-////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 Input* ApplicationManager::GetInput()
 {
 	return InputInterface;
 }
 
-////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 Output* ApplicationManager::GetOutput()
 {
 	return OutputInterface;
 }
 
-////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 
 ApplicationManager::~ApplicationManager()
 {

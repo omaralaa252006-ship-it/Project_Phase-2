@@ -54,7 +54,6 @@ string Input::GetString(Output* pOut)
 	}
 }
 
-
 	///TODO: Implement this Function
 	//Read a complete string from the user until the user presses "ENTER".
 	//If the user presses "ESCAPE". This function should return an empty string.
@@ -146,7 +145,12 @@ ActionType Input::GetUserAction() const
 			case ITM_SIM: return Simulation;
 			case ITM_TRUTH: return Create_TruthTable;
 			case ITM_DSN_MODE: return DSN_MODE;
+
 			}
+		}
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return SELECT;	//user want to select/unselect a component
 		}
 	}
 

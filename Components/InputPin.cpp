@@ -12,3 +12,5 @@ Component* InputPin::getComponent()
 {
 	return pComp;
 }
+
+//test allah test test

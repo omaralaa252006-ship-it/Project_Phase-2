@@ -6,48 +6,48 @@
 //All possible actions
 enum ActionType 
 {
-	ADD_Buff,			//Add 1-input Buffer gate
-	ADD_INV,			//Add 1-input Inverter gate
-	ADD_AND_GATE_2,		//Add 2-input AND gate
-	ADD_OR_GATE_2,		//Add 2-input OR gate
-	ADD_NAND_GATE_2,	//Add 2-input NAND gate
-	ADD_NOR_GATE_2,		//Add 2-input NOR gate
-	ADD_XOR_GATE_2,		//Add 2-input XOR gate
-	ADD_XNOR_GATE_2,	//Add 2-input XNOR gate
-	ADD_AND_GATE_3,		//Add 3-input AND gate
-	ADD_NOR_GATE_3,		//Add 3-input NOR gate
-	ADD_XOR_GATE_3,		//Add 3-input XOR gate
-	ADD_Switch,			//Add Switch
-	ADD_LED,			//Add LED
-	ADD_CONNECTION,		//Add Wire Connection
+	ADD_Buff,            //Add 1-input Buffer gate
+	ADD_INV,             //Add 1-input Inverter gate
+	ADD_AND_GATE_2,      //Add 2-input AND gate
+	ADD_OR_GATE_2,       //Add 2-input OR gate
+	ADD_NAND_GATE_2,     //Add 2-input NAND gate
+	ADD_NOR_GATE_2,      //Add 2-input NOR gate
+	ADD_XOR_GATE_2,      //Add 2-input XOR gate
+	ADD_XNOR_GATE_2,     //Add 2-input XNOR gate
+	ADD_AND_GATE_3,      //Add 3-input AND gate
+	ADD_NOR_GATE_3,      //Add 3-input NOR gate
+	ADD_XOR_GATE_3,      //Add 3-input XOR gate
+	ADD_Switch,          //Add Switch
+	ADD_LED,             //Add LED
+	ADD_CONNECTION,      //Add Wire Connection
 
-	ADD_Label,			//Add Label to a Component, a Connection
-	EDIT_Label,			//Edit Label of a Component, a Connection
+	ADD_Label,           //Add Label to a Component, a Connection
+	EDIT_Label,          //Edit Label of a Component, a Connection
 
-	Create_TruthTable,	//Create Truth Table of the Circuit
+	Create_TruthTable,   //Create Truth Table of the Circuit
 
-	Change_Switch,		//Change Switch Status in Simulation Mode
+	Change_Switch,       //Change Switch Status in Simulation Mode
 
-	SELECT,		//Select a Component, a Connection
-	DEL,		//Delete a Component, a Connection
+	SELECT,      //Select a Component, a Connection
+	DEL,         //Delete a Component, a Connection
 	COPY,
 	PASTE,
 	CUT,
-	MOVE,		//Move a Component, a Connection
+	MOVE,        //Move a Component, a Connection
 
-	SAVE,		//Save the whole Circuit to a file
-	LOAD,		//Load a Circuit from a file
+	SAVE,        //Save the whole Circuit to a file
+	LOAD,        //Load a Circuit from a file
 
-	UNDO,		//Undo the last Action preformed
-	REDO,		//Redo the last Action canceled
+	UNDO,        //Undo the last Action preformed
+	REDO,        //Redo the last Action canceled
 	Simulation,
-	DSN_MODE,	//Switch to Design mode
-	SIM_MODE,	//Switch to Simulatiom mode
+	DSN_MODE,    //Switch to Design mode
+	SIM_MODE,    //Switch to Simulatiom mode
 
-	EXIT,		//Exit the application
+	EXIT,        //Exit the application
 
-	STATUS_BAR,		//A click on the status bar
-	DSN_TOOL,	//A click on an empty place in the design tool bar
+	STATUS_BAR,      //A click on the status bar
+	DSN_TOOL, //A click on an empty place in the design tool bar
 
 };
 
@@ -58,7 +58,7 @@ enum STATUS
 	HIGH
 };
 
-enum  MODE	//Modes of operation
+enum  MODE    //Modes of operation
 {
 	DESIGN,
 	SIMULATION
@@ -70,52 +70,50 @@ enum DsgnMenuItem //The items of the design menu (you should add more items)
 	//Note: Items are ordered here as they appear in menu
 	//If you want to change the menu items order, change the order here
 	// --- Gates 2 ---
-	ITM_AND2,		// 2-input AND gate
-	ITM_OR2,		// 2-input OR gate
-	ITM_NAND2,		// 2-input NAND gate
-	ITM_NOR2,		// 2-input NOR gate
-	ITM_XOR,		// 2-input XOR gate 
-	ITM_XNOR2,		// 2-input XNOR gate
+	ITM_AND2,       // 2-input AND gate
+	ITM_OR2,        // 2-input OR gate
+	ITM_NAND2,      // 2-input NAND gate
+	ITM_NOR2,       // 2-input NOR gate
+	ITM_XOR,        // 2-input XOR gate 
+	ITM_XNOR2,      // 2-input XNOR gate
 
 	// --- Gates 3 ---
-	ITM_AND3,		// 3-input AND gate
-	ITM_NOR3,		// 3-input NOR gate
-	ITM_XOR3,		// 3-input XOR gate
+	ITM_AND3,       // 3-input AND gate
+	ITM_NOR3,       // 3-input NOR gate
+	ITM_XOR3,       // 3-input XOR gate
 
 	// --- 1 Input Gates ---
-	ITM_Buff,		// Buffer
-	ITM_INV,		// Inverter
-	ITM_SIM_MODE,	// Switch to Simulation Mode
+	ITM_Buff,       // Buffer
+	ITM_INV,        // Inverter
+	
 	// --- Input/Output Components ---
-	//ITM_Switch,		// Switch
-	ITM_LED,		// LED
+	ITM_Switch,     // Switch
+	ITM_LED,        // LED
 
 	// --- Connection ---
-	ITM_CONNECTION,	// Wire Connection
+	ITM_CONNECTION, // Wire Connection
 
 	// --- Editing Tools ---
-	ITM_ADD_LABEL,	// Label Components/Connections
-	ITM_EDIT_LABEL,		// Edit Component/Connection (Modify labels/pins)
-	ITM_SELECT,		// Select/Unselect a Component
-	ITM_DEL,		// Delete Component/Connection
-	ITM_MOVE,		// Move Component
+	ITM_ADD_LABEL,  // Label Components/Connections
+	ITM_EDIT_LABEL,     // Edit Component/Connection (Modify labels/pins)
+	ITM_SELECT,     // Select/Unselect a Component
+	ITM_DEL,        // Delete Component/Connection
+	ITM_MOVE,       // Move Component
 
 	// --- Clipboard Operations ---
-	ITM_COPY,		// Copy Component
-	ITM_CUT,		// Cut Component
-	ITM_PASTE,		// Paste Component
+	ITM_COPY,       // Copy Component
+	ITM_CUT,        // Cut Component
+	ITM_PASTE,      // Paste Component
 
 	// --- File Operations ---
-	ITM_SAVE,		// Save Circuit
-	//ITM_LOAD,		// Load Circuit
+	ITM_SAVE,       // Save Circuit
+	ITM_LOAD,       // Load Circuit
 
+	// Modes & Exit placed here to match Output.cpp toolbar ordering
+	ITM_SIM_MODE,   // Switch to Simulation Mode
+	ITM_EXIT,       // Exit
 
-	
-	ITM_EXIT,		// Exit
-
-
-	
-	ITM_DSN_CNT		//no. of design menu items ==> This should be the last line in this enum
+	ITM_DSN_CNT    //no. of design menu items ==> This should be the last line in this enum
 	
 };
 
@@ -123,13 +121,13 @@ enum DsgnMenuItem //The items of the design menu (you should add more items)
 enum SimMenuItem //The items of the simulation menu (you should add more items)
 {
 	//Note: Items are ordered here as they appear in menu
-	ITM_SIM,	//Simulate menu item
-	ITM_TRUTH,	//Truth table menu item
-	ITM_DSN_MODE,	// Switch Back to Design Mode
+	ITM_SIM,    //Simulate menu item
+	ITM_TRUTH,  //Truth table menu item
+	ITM_DSN_MODE,    // Switch Back to Design Mode
 	//ITM_Probing,
 
 	
-	ITM_SIM_CNT		//no. of simulation menu items ==> This should be the last line in this enum
+	ITM_SIM_CNT        //no. of simulation menu items ==> This should be the last line in this enum
 	
 };
 
@@ -139,17 +137,17 @@ enum SimMenuItem //The items of the simulation menu (you should add more items)
 //assume fan out is 5 for now it can be read from the user or can be predefined as const
 enum FANOUT
 {
-	AND2_FANOUT = 5,	//Default fan out of 2-input AND gate
-	OR2_FANOUT = 5,		//Default fan out of 2-input OR gate
-	NAND2_FANOUT = 5,	//Default fan out of 2-input NAND gate
-	NOR2_FANOUT = 5,	//Default fan out of 2-input NOR gate
-	XOR_FANOUT = 5,	    //Default fan out of 2-input XOR gate
-	XNOR2_FANOUT = 5,	//Default fan out of 2-input XNOR gate
-	AND3_FANOUT = 5,	//Default fan out of 3-input AND gate
-	NOR3_FANOUT = 5,	//Default fan out of 3-input NOR gate
-	XOR3_FANOUT = 5,	//Default fan out of 3-input XOR gate
-	BUFF_FANOUT = 5,	//Default fan out of Buffer gate
-	INV_FANOUT = 5		//Default fan out of Inverter gate
+	AND2_FANOUT = 5,    //Default fan out of 2-input AND gate
+	OR2_FANOUT = 5,     //Default fan out of 2-input OR gate
+	NAND2_FANOUT = 5,   //Default fan out of 2-input NAND gate
+	NOR2_FANOUT = 5,    //Default fan out of 2-input NOR gate
+	XOR_FANOUT = 5,     //Default fan out of 2-input XOR gate
+	XNOR2_FANOUT = 5,   //Default fan out of 2-input XNOR gate
+	AND3_FANOUT = 5,    //Default fan out of 3-input AND gate
+	NOR3_FANOUT = 5,    //Default fan out of 3-input NOR gate
+	XOR3_FANOUT = 5,    //Default fan out of 3-input XOR gate
+	BUFF_FANOUT = 5,    //Default fan out of Buffer gate
+	INV_FANOUT = 5      //Default fan out of Inverter gate
 };
 
 //A structure to contain drawing parameters for each component
