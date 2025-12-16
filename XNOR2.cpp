@@ -14,6 +14,14 @@ void XNOR2::Operate()
 	//caclulate the output status as the ANDing of the two input pins
 
 	//Add you code here
+	if (m_InputPins[0].getStatus() == m_InputPins[1].getStatus())
+	{
+		m_OutputPin.setStatus(HIGH);
+	}
+	else
+	{
+		m_OutputPin.setStatus(LOW);
+	}
 }
 
 

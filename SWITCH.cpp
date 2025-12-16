@@ -14,6 +14,14 @@ void SWITCH::Operate()
 	//caclulate the output status as the ORing of the two input pins
 
 	//Add you code here
+	if (m_InputPins[0].getStatus() == HIGH)
+	{
+		m_OutputPin.setStatus(HIGH);
+	}
+	else
+	{
+		m_OutputPin.setStatus(LOW);
+	}
 
 }
 

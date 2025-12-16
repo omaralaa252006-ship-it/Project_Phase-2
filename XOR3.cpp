@@ -1,6 +1,6 @@
 #include "XOR3.h"
 
-XOR3::XOR3(const GraphicsInfo& r_GfxInfo, int r_FanOut) :Gate(2, r_FanOut)
+XOR3::XOR3(const GraphicsInfo& r_GfxInfo, int r_FanOut) :Gate(3, r_FanOut)
 {
 	m_GfxInfo.x1 = r_GfxInfo.x1;
 	m_GfxInfo.y1 = r_GfxInfo.y1;
@@ -14,6 +14,22 @@ void XOR3::Operate()
 	//caclulate the output status as the ANDing of the two input pins
 
 	//Add you code here
+	if (m_InputPins[0].getStatus() != m_InputPins[1].getStatus() && m_InputPins[0].getStatus() != m_InputPins[2].getStatus())
+	{
+		m_OutputPin.setStatus(HIGH);
+	}
+	else if (m_InputPins[1].getStatus() != m_InputPins[0].getStatus() && m_InputPins[1].getStatus() != m_InputPins[2].getStatus())
+	{
+		m_OutputPin.setStatus(HIGH);
+	}
+	else if (m_InputPins[2].getStatus() != m_InputPins[0].getStatus() && m_InputPins[2].getStatus() != m_InputPins[1].getStatus())
+	{
+		m_OutputPin.setStatus(HIGH);
+	}
+	else
+	{
+		m_OutputPin.setStatus(LOW);
+	}
 }
 
 
