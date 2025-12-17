@@ -236,6 +236,9 @@
     <ClCompile Include="Move.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="TruthTable.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defs.H" />
@@ -432,6 +435,9 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Move.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="TruthTable.h">
       <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>

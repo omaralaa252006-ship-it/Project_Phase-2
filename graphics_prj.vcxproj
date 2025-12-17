@@ -202,6 +202,7 @@
     <ClCompile Include="Paste.cpp" />
     <ClCompile Include="Select.cpp" />
     <ClCompile Include="SWITCH.cpp" />
+    <ClCompile Include="TruthTable.cpp" />
     <ClCompile Include="XNOR2.cpp" />
     <ClCompile Include="XOR.cpp" />
     <ClCompile Include="XOR3.cpp" />
@@ -270,6 +271,7 @@
     <ClInclude Include="Paste.h" />
     <ClInclude Include="Select.h" />
     <ClInclude Include="SWITCH.h" />
+    <ClInclude Include="TruthTable.h" />
     <ClInclude Include="XNOR2.h" />
     <ClInclude Include="XOR.h" />
     <ClInclude Include="XOR3.h" />
