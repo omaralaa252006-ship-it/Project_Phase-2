@@ -51,12 +51,13 @@ int Gate::GetInputPinIndex(int x, int y)
 	{
 		int px, py;
 		GetInputPinCoordinates(px, py, i);
-		// Tolerance logic: Check if click is close enough
-		if (abs(x - px) <= 10 && abs(y - py) <= 10)
+		// Tolerance logic: Check if click is close enough (20 pixel tolerance)
+		if (abs(x - px) <= 20 && abs(y - py) <= 20)
 			return i;
 	}
 	return -1;
 }
+
 
 OutputPin* Gate::GetOutputPin()
 {

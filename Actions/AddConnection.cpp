@@ -73,36 +73,48 @@ bool AddConnection::DetectSourceComponent(int x, int y)
 {
 	Component* comp = pManager->GetComponentAt(x, y);
 
+	// If direct click didn't find a component, search in a small radius
+	if (comp == NULL)
+	{
+		const int searchOffsets[] = {-20, -10, 0, 10, 20};
+		for (int i = 0; i < 5; i++)
+		{
+			for (int j = 0; j < 5; j++)
+			{
+				comp = pManager->GetComponentAt(x + searchOffsets[i], y + searchOffsets[j]);
+				if (comp != NULL)
+					break;
+			}
+			if (comp != NULL)
+				break;
+		}
+	}
+
 	if (comp == NULL)
 		return false;
 
-	// Check if it's a Gate
+	// Check if it's a Gate (all gates including SWITCH have output pins)
 	Gate* gate = dynamic_cast<Gate*>(comp);
 	if (gate)
 	{
-		// Check if click is near output pin
-		int ox, oy;
-		gate->GetOutputPinCoordinates(ox, oy);
-		if (abs(x - ox) <= 15 && abs(y - oy) <= 15) // Tolerance
+		// Clicking anywhere on the gate uses its output pin
+		// No need to click exactly on the pin location
+		if (!gate->GetOutputPin()->isFull())
 		{
-			// Verify if output pin is not full
-			if (!gate->GetOutputPin()->isFull())
-			{
-				mSrcPin = gate->GetOutputPin();
-				// Update coordinates to exact pin location for drawing
-				mGfxInfo.x1 = ox;
-				mGfxInfo.y1 = oy;
-				return true;
-			}
+			mSrcPin = gate->GetOutputPin();
+			// Get exact pin coordinates for drawing
+			int ox, oy;
+			gate->GetOutputPinCoordinates(ox, oy);
+			mGfxInfo.x1 = ox;
+			mGfxInfo.y1 = oy;
+			return true;
 		}
 	}
-	// Note: Switch doesn't have Input pins but has Output pin. 
-	// The provided code used dynamic_cast<Gate*>. SWITCH inherits from Gate in this project.
-	// So dynamic_cast<Gate*> works for Switch too.
-	// However, Switch has Output Pin.
 
 	return false;
 }
+
+
 
 #include "..\LED.h"
 
@@ -114,12 +126,32 @@ bool AddConnection::DetectDestinationComponent(int x, int y)
 {
 	Component* comp = pManager->GetComponentAt(x, y);
 
+	// If direct click didn't find a component, search in a small radius
+	if (comp == NULL)
+	{
+		const int searchOffsets[] = {-20, -10, 0, 10, 20};
+		for (int i = 0; i < 5; i++)
+		{
+			for (int j = 0; j < 5; j++)
+			{
+				comp = pManager->GetComponentAt(x + searchOffsets[i], y + searchOffsets[j]);
+				if (comp != NULL)
+					break;
+			}
+			if (comp != NULL)
+				break;
+		}
+	}
+
 	if (comp == NULL)
 		return false;
 
+	// Check if it's a Gate - find first available (unconnected) input pin
 	Gate* gate = dynamic_cast<Gate*>(comp);
 	if (gate)
 	{
+		// Try to find the first unconnected input pin
+		// First, try to match by click position if possible
 		int index = gate->GetInputPinIndex(x, y);
 		if (index != -1)
 		{
@@ -128,7 +160,6 @@ bool AddConnection::DetectDestinationComponent(int x, int y)
 			{
 				mDstPin = pin;
 				mDstPinIndex = index;
-				// Update coordinates to exact pin location for drawing
 				int ix, iy;
 				gate->GetInputPinCoordinates(ix, iy, index);
 				mGfxInfo.x2 = ix;
@@ -136,28 +167,41 @@ bool AddConnection::DetectDestinationComponent(int x, int y)
 				return true;
 			}
 		}
+		
+		// If no pin matched by position, find first unconnected pin
+		for (int i = 0; i < 3; i++) // Gates have max 3 inputs
+		{
+			InputPin* pin = gate->GetInputPin(i);
+			if (pin && !pin->isConnected())
+			{
+				mDstPin = pin;
+				mDstPinIndex = i;
+				int ix, iy;
+				gate->GetInputPinCoordinates(ix, iy, i);
+				mGfxInfo.x2 = ix;
+				mGfxInfo.y2 = iy;
+				return true;
+			}
+		}
 	}
 	
+	// Check if it's an LED - clicking anywhere uses its input pin
 	LED* led = dynamic_cast<LED*>(comp);
 	if (led)
 	{
 		InputPin* pin = led->GetInputPin();
-		int lx, ly;
-		led->GetInputPinCoordinates(lx, ly);
-		
-		if (abs(x - lx) <= 15 && abs(y - ly) <= 15)
+		if (pin && !pin->isConnected())
 		{
-			if (pin && !pin->isConnected())
-			{
-				mDstPin = pin;
-				// LED has only one input, index 0 implicitly
-				mDstPinIndex = 0;
-				mGfxInfo.x2 = lx;
-				mGfxInfo.y2 = ly;
-				return true;
-			}
+			mDstPin = pin;
+			mDstPinIndex = 0;
+			int lx, ly;
+			led->GetInputPinCoordinates(lx, ly);
+			mGfxInfo.x2 = lx;
+			mGfxInfo.y2 = ly;
+			return true;
 		}
 	}
 
 	return false;
 }
+

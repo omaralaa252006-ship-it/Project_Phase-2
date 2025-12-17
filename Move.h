@@ -7,7 +7,8 @@
 //{
 //private:
 //	//Parameters for rectangular area to be occupied by the gate
-//	int newX,newY;	//Center point of the gate
+//	int newX, newY;	//Center point of the gate
+//	int Cx, Cy;
 //
 //public:
 //	Move(ApplicationManager* pApp);
