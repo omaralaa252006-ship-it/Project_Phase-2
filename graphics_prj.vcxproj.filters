@@ -5,6 +5,9 @@
     <ClCompile Include="Actions\AddANDgate2.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\AddConnection.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
     <ClCompile Include="Components\AND2.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -243,6 +246,9 @@
   <ItemGroup>
     <ClInclude Include="Defs.H" />
     <ClInclude Include="Actions\Action.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\AddConnection.h">
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="Actions\AddANDgate2.h">

@@ -20,3 +20,8 @@ bool OutputPin::ConnectTo(Connection *r_Conn)
 	
 	return false;	//can't connect to any more connections
 }
+
+bool OutputPin::isFull()
+{
+	return m_Conn >= m_FanOut;
+}

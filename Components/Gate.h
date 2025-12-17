@@ -22,7 +22,11 @@ protected:
 public:
 	Gate(int r_Inputs, int r_FanOut);
 	
-
+	void GetOutputPinCoordinates(int& x, int& y);
+	void GetInputPinCoordinates(int& x, int& y, int index);
+	int GetInputPinIndex(int x, int y);
+	OutputPin* GetOutputPin();
+	InputPin* GetInputPin(int index);
 };
 
 #endif

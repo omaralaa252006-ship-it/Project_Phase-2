@@ -18,6 +18,9 @@ public:
 	virtual void setInputPinStatus(int n, STATUS s);	//set status of Inputpin # n, to be used by connection class.
 
 	virtual Component* clone() override;
+	
+	InputPin* GetInputPin();
+	void GetInputPinCoordinates(int& x, int& y);
 };
 
 #endif

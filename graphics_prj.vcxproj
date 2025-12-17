@@ -206,9 +206,11 @@
     <ClCompile Include="XNOR2.cpp" />
     <ClCompile Include="XOR.cpp" />
     <ClCompile Include="XOR3.cpp" />
+    <ClCompile Include="Actions\AddConnection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\Action.h" />
+    <ClInclude Include="Actions\AddConnection.h" />
     <ClInclude Include="Actions\AddANDgate2.h" />
     <ClInclude Include="AddANDgate3.h" />
     <ClInclude Include="AddBUFFgate.h" />

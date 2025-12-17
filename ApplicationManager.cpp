@@ -1,4 +1,5 @@
 #include "ApplicationManager.h"
+#include "Actions\AddConnection.h"
 #include "Actions\AddANDgate2.h"
 #include "AddORgate2.h"
 #include "AddNANDgate2.h"
@@ -242,12 +243,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new Cut(this);
 			break;
 
+
+
 		case PASTE:
 			pAct = new Paste(this);
 			break;
 
 		case ADD_CONNECTION:
-			//TODO: Create AddConection Action here
+			pAct = new AddConnection(this);
 			break;
 
 			// Handle switching between modes

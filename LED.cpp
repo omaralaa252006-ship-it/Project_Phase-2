@@ -54,3 +54,14 @@ Component* LED::clone()
 {
 	return new LED(*this);
 }
+
+InputPin* LED::GetInputPin()
+{
+	return &m_InputPin;
+}
+
+void LED::GetInputPinCoordinates(int& x, int& y)
+{
+	x = m_GfxInfo.x1;
+	y = (m_GfxInfo.y1 + m_GfxInfo.y2) / 2;
+}
